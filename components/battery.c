@@ -3,6 +3,7 @@
 #include <string.h>
 
 #include "../util.h"
+#include <wchar.h>      /* wint_t */
 
 #if defined(__linux__)
 	#include <limits.h>
@@ -29,18 +30,54 @@
 	const char *
 	battery_perc(const char *bat)
 	{
-		int perc;
-		char path[PATH_MAX];
+		int charge_now;
+		int charge_full_design;
+		char path_designed[PATH_MAX];
+		char path_current[PATH_MAX];
 
-		if (esnprintf(path, sizeof(path),
-		              "/sys/class/power_supply/%s/capacity", bat) < 0) {
+		if (esnprintf(path_current, sizeof(path_current),
+		              "/sys/class/power_supply/%s/charge_now", bat) < 0) {
 			return NULL;
 		}
-		if (pscanf(path, "%d", &perc) != 1) {
+		if (esnprintf(path_designed, sizeof(path_designed),
+		              "/sys/class/power_supply/%s/charge_full_design", bat) < 0) {
+			return NULL;
+		}
+		if (pscanf(path_current, "%d", &charge_now) != 1) {
+			return NULL;
+		}
+		if (pscanf(path_designed, "%d", &charge_full_design) != 1) {
 			return NULL;
 		}
 
-		return bprintf("%d", perc);
+		return bprintf("%d", charge_now * 100 / charge_full_design);
+	}
+
+	const char *
+	battery_watt(const char *bat)
+	{
+		float watt;
+		int current;
+		int voltage;
+		char pathCurrent[PATH_MAX];
+		char pathVoltage[PATH_MAX];
+
+		if (esnprintf(pathCurrent, sizeof(pathCurrent),
+		              "/sys/class/power_supply/%s/current_now", bat) < 0) {
+			return NULL;
+		}
+		if (esnprintf(pathVoltage, sizeof(pathVoltage),
+		              "/sys/class/power_supply/%s/voltage_now", bat) < 0) {
+			return NULL;
+		}
+		if (pscanf(pathCurrent, "%d", &current) != 1) {
+			return NULL;
+		}
+		if (pscanf(pathVoltage, "%d", &voltage) != 1) {
+			return NULL;
+		}
+        watt = (float)current / 1000000.0 * (float)voltage / 1000000.0;
+		return bprintf("%3.2f", watt);
 	}
 
 	const char *
@@ -50,10 +87,10 @@
 			char *state;
 			char *symbol;
 		} map[] = {
-			{ "Charging",    "+" },
-			{ "Discharging", "-" },
-		};
-		size_t i;
+			{ "Charging",    "⚇ CHR" },
+			{ "Discharging", "⚡ BAT" },
+        };
+        size_t i;
 		char path[PATH_MAX], state[12];
 
 		if (esnprintf(path, sizeof(path),
@@ -69,7 +106,7 @@
 				break;
 			}
 		}
-		return (i == LEN(map)) ? "?" : map[i].symbol;
+		return (i == LEN(map)) ? "☻ FULL" : map[i].symbol;
 	}
 
 	const char *

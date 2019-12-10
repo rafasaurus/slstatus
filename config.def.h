@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* interval between updates (in ms) */
-const unsigned int interval = 1000;
+const unsigned int interval = 800;
 
 /* text to show if no value can be retrieved */
 static const char unknown_str[] = "n/a";
@@ -63,5 +63,19 @@ static const char unknown_str[] = "n/a";
  */
 static const struct arg args[] = {
 	/* function format          argument */
-	{ datetime, "%s",           "%F %T" },
+    { battery_state, " %s", "BAT0" },
+    { battery_perc, ":%s", "BAT0" },
+    // { netspeed_rx, "| tx:%s", "enp0s20f0u1" },
+    { netspeed_tx, "%|  %s", "enp0s20f0u1" },
+    { ram_used, "|🖪 %s", NULL },
+    { ipv4, "|🌏 %s", "enp0s20f0u1" },
+    { cpu_perc, "|🍸 CPU:%s",           NULL },
+    { cpu_freq, "|🏛 %shz",           NULL },
+    { disk_free, "% |🗃 %s",           "/" },
+    // { entropy, "| %s",           NULL },
+    // { hostname, "% | %s",           "/" },
+    // { keymap, "% | %s",           "/" },
+    { battery_watt, "% | %sW " ,           "BAT0" },
+	{ datetime, "|🕖 %s ",           "%I:%M %p" },
+    // { vol_perc," %s", "/run/user/1000/pulse/native"}
 };
