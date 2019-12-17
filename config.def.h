@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* interval between updates (in ms) */
-const unsigned int interval = 800;
+const unsigned int interval = 1850;
 
 /* text to show if no value can be retrieved */
 static const char unknown_str[] = "n/a";
@@ -13,8 +13,7 @@ static const char unknown_str[] = "n/a";
  * function            description                     argument (example)
  *
  * battery_perc        battery percentage              battery name (BAT0)
- *                                                     NULL on OpenBSD/FreeBSD
- * battery_state       battery charging state          battery name (BAT0)
+ *                                                     NULL on OpenBSD/FreeBSD * battery_state       battery charging state          battery name (BAT0)
  *                                                     NULL on OpenBSD/FreeBSD
  * battery_remaining   battery remaining HH:MM         battery name (BAT0)
  *                                                     NULL on OpenBSD/FreeBSD
@@ -65,13 +64,16 @@ static const struct arg args[] = {
 	/* function format          argument */
     { battery_state, " %s", "BAT0" },
     { battery_perc, ":%s", "BAT0" },
+    { battery_remaining, "%| %s", "BAT0" },
     // { netspeed_rx, "| tx:%s", "enp0s20f0u1" },
-    { netspeed_tx, "%|  %s", "enp0s20f0u1" },
+    { netspeed_rx, "|   %s", "enp0s20f0u1" },
     { ram_used, "|🖪 %s", NULL },
     { ipv4, "|🌏 %s", "enp0s20f0u1" },
     { cpu_perc, "|🍸 CPU:%s",           NULL },
     { cpu_freq, "|🏛 %shz",           NULL },
-    { disk_free, "% |🗃 %s",           "/" },
+    { temp, "|🏛 %st",           "/sys/class/thermal/thermal_zone9/temp" },
+    { fan_speed, "|☢️ %s rpm",           "/proc/i8k" },
+    { disk_free, " |🗃 %s",           "/" },
     // { entropy, "| %s",           NULL },
     // { hostname, "% | %s",           "/" },
     // { keymap, "% | %s",           "/" },

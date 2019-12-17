@@ -3,7 +3,6 @@
 
 #include "../util.h"
 
-
 #if defined(__linux__)
 	#include <stdint.h>
 
@@ -18,6 +17,27 @@
 
 		return bprintf("%ju", temp / 1000);
 	}
+
+	const char *
+	fan_speed(const char *file)
+	{
+		char i8k_result[50];
+		if (pscanf(file, "%50[^\n]s", &i8k_result) != 1) {
+			return NULL;
+		}
+        char** tokens;
+        tokens = str_split(i8k_result, ' ');
+        char* result;
+        if (tokens)
+        {
+            result = *(tokens + 7);
+            free(tokens);
+        } else {
+            return NULL;
+        }
+		return bprintf("%s", result);
+	}
+
 #elif defined(__OpenBSD__)
 	#include <stdio.h>
 	#include <sys/time.h> /* before <sys/sensors.h> for struct timeval */

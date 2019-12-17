@@ -1,4 +1,17 @@
 slstatus - suckless status
+rafasaurus edits
+==========================
+if you want to enable fan_speed in status bar in dell xps 13 9350
+follow the instructions in arch linux wiki `https://wiki.archlinux.org/index.php/Dell_XPS_13_(9350)`
+install i8kutils 
+
+If i8kutils is installed it will show fan speed and temperature sensors with: 
+
+install https://aur.archlinux.org/packages/dell-bios-fan-control-git/
+sudo dell-bios-fan-control 0
+sudo modprobe i8k force=1
+echo 'ik8' | sudo tee -a /etc/modules
+systemctl start i8kmon
 ==========================
 slstatus is a suckless status monitor for window managers that use WM_NAME
 (e.g. dwm) or stdin to fill the status bar.

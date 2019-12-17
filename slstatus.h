@@ -65,6 +65,8 @@ const char *swap_used(void);
 
 /* temperature */
 const char *temp(const char *);
+/* cpu fan rpm */
+const char *fan_speed(const char *);
 
 /* uptime */
 const char *uptime(void);

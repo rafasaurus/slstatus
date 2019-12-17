@@ -1,5 +1,9 @@
 /* See LICENSE file for copyright and license details. */
 #include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <assert.h>
 
 extern char buf[1024];
 
@@ -14,3 +18,4 @@ int esnprintf(char *str, size_t size, const char *fmt, ...);
 const char *bprintf(const char *fmt, ...);
 const char *fmt_human(uintmax_t num, int base);
 int pscanf(const char *path, const char *fmt, ...);
+char** str_split(char* a_str, const char a_delim);
