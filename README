@@ -12,6 +12,12 @@ sudo dell-bios-fan-control 0
 sudo modprobe i8k force=1
 echo 'ik8' | sudo tee -a /etc/modules
 systemctl start i8kmon
+
+To enable fan_speed at startup
+    echo i8k >> /etc/modules
+    echo options i8k force=1 > /etc/modprobe.d/i8k.conf
+in .xprofile
+    i8kmon &
 ==========================
 slstatus is a suckless status monitor for window managers that use WM_NAME
 (e.g. dwm) or stdin to fill the status bar.
