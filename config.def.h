@@ -67,10 +67,10 @@ static const struct arg args[] = {
     { battery_remaining, "%| %s", "BAT0" },
     // { netspeed_rx, "| tx:%s", "enp0s20f0u1" },
     { netspeed_rx, "|   %s", "enp0s20f0u1" },
-    { ram_used, "|🖪 %s", NULL },
+    { ram_used, "| %s", NULL },
     { ipv4, "|🌏 %s", "enp0s20f0u1" },
     { cpu_perc, "|🍸 CPU:%s",           NULL },
-    { cpu_freq, "|🏛 %shz",           NULL },
+    { cpu_freq, "| %shz",           NULL },
     { temp, "|🏛 %st",           "/sys/class/thermal/thermal_zone9/temp" },
     { fan_speed, "|☢️ %s rpm",           "/proc/i8k" },
     { disk_free, " |🗃 %s",           "/" },
@@ -78,6 +78,6 @@ static const struct arg args[] = {
     // { hostname, "% | %s",           "/" },
     // { keymap, "% | %s",           "/" },
     { battery_watt, "% | %sW " ,           "BAT0" },
-	{ datetime, "|🕖 %s ",           "%I:%M %p" },
-    // { vol_perc," %s", "/run/user/1000/pulse/native"}
+	{ datetime, "| %s ",           "%I:%M %p" },
+    // { vol_perc," %s", "/usr/bin/alsamixer"}
 };
