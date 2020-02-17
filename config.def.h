@@ -78,6 +78,6 @@ static const struct arg args[] = {
     // { hostname, "% | %s",           "/" },
     // { keymap, "% | %s",           "/" },
     { battery_watt, "% | %sW " ,           "BAT0" },
-	{ datetime, "| %s ",           "%I:%M %p" },
-    // { vol_perc," %s", "/usr/bin/alsamixer"}
+    { vol_perc,"| 🎵:%s ", "/dev/mixer"},
+	{ datetime, " |  %s ",           "%I:%M %p" }
 };

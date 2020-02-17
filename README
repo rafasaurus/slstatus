@@ -18,6 +18,10 @@ To enable fan_speed at startup
     echo options i8k force=1 > /etc/modprobe.d/i8k.conf
 in .xprofile
     i8kmon &
+
+in order alsamixer to work create a file,
+/etc/modules-load.d/modules.conf
+   snd-pcm-oss
 ==========================
 slstatus is a suckless status monitor for window managers that use WM_NAME
 (e.g. dwm) or stdin to fill the status bar.
