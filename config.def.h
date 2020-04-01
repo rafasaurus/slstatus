@@ -62,22 +62,19 @@ static const char unknown_str[] = "n/a";
  */
 static const struct arg args[] = {
 	/* function format          argument */
-    { battery_state, " %s", "BAT0" },
-    { battery_perc, ":%s", "BAT0" },
-    { battery_remaining, "%| %s", "BAT0" },
-    // { netspeed_rx, "| tx:%s", "enp0s20f0u1" },
-    { netspeed_rx, "|   %s", "enp0s20f0u1" },
-    { ram_used, "| %s", NULL },
-    { ipv4, "|🌏 %s", "enp0s20f0u1" },
-    { cpu_perc, "|🍸 CPU:%s",           NULL },
-    { cpu_freq, "| %shz",           NULL },
-    { temp, "|🏛 %st",           "/sys/class/thermal/thermal_zone9/temp" },
-    { fan_speed, "|☢️ %s rpm",           "/proc/i8k" },
-    { disk_free, " |🗃 %s",           "/" },
-    // { entropy, "| %s",           NULL },
-    // { hostname, "% | %s",           "/" },
-    // { keymap, "% | %s",           "/" },
-    { battery_watt, "% | %sW " ,           "BAT0" },
-    { vol_perc,"| 🎵:%s ", "/dev/mixer"},
-	{ datetime, " |  %s ",           "%I:%M %p" }
+    { battery_state,                    " %s", "BAT0" },
+    { battery_perc,                     ":%s", "BAT0" },
+    // { netspeed_rx,                      "|🌐 tx:%s", "enp0s20f0u1" },
+    { netspeed_rx,                      "|🌐 rx:%s", "enp0s20f0u1" },
+    { ram_used,                         "|🐳 %s", NULL },
+    { ipv4,                             "|🌏 %s", "enp0s20f0u1" },
+    { cpu_perc,                         "|🍸 CPU:%s",           NULL },
+    { cpu_freq,                         "|🚤 %shz",           NULL },
+    { temp,                             "|🔥 %st",           "/sys/class/thermal/thermal_zone9/temp" },
+    // { fan_speed, "|☢️ %s rpm",           "/proc/i8k" },
+    { disk_free,                        "|💾 %s",           "/" },
+    { keymap,                           "%|🎹 %s",           "NULL" },
+    { battery_watt,                     "|💛 %sW" ,           "BAT0" },
+    { vol_perc,                         "|🔊 %s", "/dev/mixer"},
+	{ datetime,                         "|🕛 %s ",           "%I:%M %p" }
 };
